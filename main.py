@@ -35,6 +35,9 @@ def create_board():
     board = np.zeros((ROWS,COLS))
     return board
 
+def print_board(board):
+    print(np.flip(board, 0))
+
 def drop_piece(board, row, col, piece):
     board[row][col] = piece
 
@@ -46,8 +49,7 @@ def get_next_open_row(board, col):
         if board[row][col] == 0:
             return row
 
-def print_board(board):
-    print(np.flip(board, 0))
+
 
 def winning_move(board, piece):
     #  horizontal 
@@ -199,21 +201,7 @@ def get_valid_locations(board):
             valid_locations.append(col)
     return valid_locations
 
-def pick_best_move(board, piece):
 
-    valid_locations = get_valid_locations(board)
-    best_score = -10000
-    best_col = random.choice(valid_locations)
-    for col in valid_locations:
-        row = get_next_open_row(board, col)
-        temp_board = board.copy()
-        drop_piece(temp_board, row, col, piece)
-        score = score_position(temp_board, piece)
-        if score > best_score:
-            best_score = score
-            best_col = col
-
-    return best_col
 
 def draw_board(board,human_colour,ai_colour):
     for col in range(COLS):
